@@ -5,7 +5,7 @@ const OpearloAnalytics = require('opearlo-analytics');
 // const APP_ID = 'amzn1.ask.skill.4af154b7-b157-499d-aa15-16f4e2fb197d';
 const opearloApiKey = 'RrTGUvJLyz3w5yR8zaC5p5V7Q83VCnfv6M8fnrCE';
 const opearloUserId = 'kJnUOYznWOZmmLEv4aUesaMrOg63';
-const voiceAppName = '';
+const voiceAppName = 'footy-facts';
 
 const reprompt = 'Ask me for a footy fact';
 const helpMessage = 'Ask me for a footy fact';
@@ -28,6 +28,9 @@ const handlers = {
     OpearloAnalytics.recordAnalytics(this.event.session.user.userId, opearloApiKey, (result) => {
       this.emit(':tell', 'Thanks for using footy facts. Goodbye!');
     });
+  },
+  'AMAZON.HelpIntent': function () {
+    this.emit(':ask', helpMessage, reprompt);
   },
   'AMAZON.YesIntent': function () {
     this.emit('GetFactIntent');
